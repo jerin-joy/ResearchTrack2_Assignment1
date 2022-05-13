@@ -1,7 +1,7 @@
 #include "ros/ros.h"
 #include "rt2_assignment1/RandomPosition.h"
 
-//random number generation
+//generate random numbers
 double randMToN(double M, double N)
 {     return M + (rand() / ( RAND_MAX / (N-M) ) ) ; }
 
