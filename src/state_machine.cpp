@@ -28,7 +28,6 @@ int main(int argc, char **argv)
    ros::ServiceServer service= n.advertiseService("/user_interface", user_interface);
    ros::ServiceClient client_rp = n.serviceClient<rt2_assignment1::RandomPosition>("/position_server");
    ros::Publisher pub = n.advertise<geometry_msgs::Twist>("/cmd_vel", 1000);
-   //ros::ServiceClient client_p = n.serviceClient<rt2_assignment1::Position>("/go_to_point");
    actionlib::SimpleActionClient<rt2_assignment1::MoveAction> ac("/go_to_point", true);
    
    rt2_assignment1::RandomPosition rp;
@@ -38,7 +37,6 @@ int main(int argc, char **argv)
    rp.request.x_min = -5.0;
    rp.request.y_max = 5.0;
    rp.request.y_min = -5.0;
-   //rt2_assignment1::Position p;
    geometry_msgs::Twist twist_msg;
    
    while(ros::ok()){
@@ -49,7 +47,6 @@ int main(int argc, char **argv)
    		goal.y = rp.response.y;
    		goal.theta = rp.response.theta;
    		std::cout << "\nGoing to the position: x= " << goal.x << " y= " <<goal.y << " theta = " <<goal.theta << std::endl;
-   		//client_p.call(p);
         ROS_INFO("Sending goal");
         ac.sendGoal(goal);
 
@@ -74,10 +71,8 @@ int main(int argc, char **argv)
             }
         }
 
-        //ac.waitForResult();
-
    		std::cout << "Position reached" << std::endl;
-        //break;
+        //break;        //Uncomment this line to stop the robot at the initial goal.
    	}
 
 

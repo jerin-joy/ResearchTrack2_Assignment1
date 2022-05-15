@@ -111,7 +111,6 @@ def fix_final_yaw(des_yaw):
     pub_.publish(twist_msg)
     # state change conditions
     if math.fabs(err_yaw) <= yaw_precision_2_:
-        #print ('Yaw error: [%s]' % err_yaw)
         change_state(3)
         
 def done():
@@ -160,7 +159,6 @@ def main():
     rospy.init_node('go_to_point')
     pub_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
     sub_odom = rospy.Subscriber('/odom', Odometry, clbk_odom)
-    #service = rospy.Service('/go_to_point', Position, go_to_point)
     act_s = actionlib.SimpleActionServer('/go_to_point', rt2_assignment1.msg.MoveAction, go_to_point, auto_start = False)
     act_s.start()
     rospy.spin()
