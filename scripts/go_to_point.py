@@ -21,11 +21,12 @@ pub_ = None
 yaw_precision_ = math.pi / 9  # +/- 20 degree allowed
 yaw_precision_2_ = math.pi / 90  # +/- 2 degree allowed
 dist_precision_ = 0.1
-kp_a = -3.0 
+kp_a = -3.0
 kp_d = 0.2
 ub_a = 0.6
 lb_a = -0.5
 ub_d = 0.6
+
 
 def clbk_odom(msg):
     global position_
@@ -47,13 +48,14 @@ def clbk_odom(msg):
 def change_state(state):
     global state_
     state_ = state
-    print ('State changed to [%s]' % state_)
+    print('State changed to [%s]' % state_)
 
 
 def normalize_angle(angle):
     if(math.fabs(angle) > math.pi):
         angle = angle - (2 * math.pi * angle) / (math.fabs(angle))
     return angle
+
 
 def fix_yaw(des_pos):
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
@@ -89,7 +91,7 @@ def go_straight_ahead(des_pos):
 
         twist_msg.angular.z = kp_a*err_yaw
         pub_.publish(twist_msg)
-    else: # state change conditions
+    else:  # state change conditions
         #print ('Position error: [%s]' % err_pos)
         change_state(2)
 
@@ -97,6 +99,7 @@ def go_straight_ahead(des_pos):
     if math.fabs(err_yaw) > yaw_precision_:
         #print ('Yaw error: [%s]' % err_yaw)
         change_state(0)
+
 
 def fix_final_yaw(des_yaw):
     err_yaw = normalize_angle(des_yaw - yaw_)
@@ -112,16 +115,18 @@ def fix_final_yaw(des_yaw):
     # state change conditions
     if math.fabs(err_yaw) <= yaw_precision_2_:
         change_state(3)
-        
+
+
 def done():
     twist_msg = Twist()
     twist_msg.linear.x = 0
     twist_msg.angular.z = 0
     pub_.publish(twist_msg)
-    
+
+
 def go_to_point(req):
 
-    global act_s 
+    global act_s
 
     desired_position = Point()
     desired_position.x = req.x
@@ -137,7 +142,7 @@ def go_to_point(req):
             rospy.loginfo('Goal was preempted')
             act_s.set_preempted()
             success = False
-            done()                                                                   
+            done()
             break
         elif state_ == 0:
             fix_yaw(desired_position)
@@ -153,15 +158,18 @@ def go_to_point(req):
         act_s.set_succeeded(result)
     return True
 
+
 def main():
     global pub_
     global act_s
     rospy.init_node('go_to_point')
     pub_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
     sub_odom = rospy.Subscriber('/odom', Odometry, clbk_odom)
-    act_s = actionlib.SimpleActionServer('/go_to_point', rt2_assignment1.msg.MoveAction, go_to_point, auto_start = False)
+    act_s = actionlib.SimpleActionServer(
+        '/go_to_point', rt2_assignment1.msg.MoveAction, go_to_point, auto_start=False)
     act_s.start()
     rospy.spin()
+
 
 if __name__ == '__main__':
     main()
