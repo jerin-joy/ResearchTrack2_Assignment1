@@ -9,6 +9,7 @@ import math
 import actionlib
 import rt2_assignment1.msg
 
+act_s = None
 # robot state variables
 position_ = Point()
 yaw_ = 0
@@ -136,7 +137,8 @@ def go_to_point(req):
         if act_s.is_preempt_requested():
             rospy.loginfo('Goal was preempted')
             act_s.set_preempted()
-            success = False                                                                   
+            success = False
+            done()                                                                   
             break
         elif state_ == 0:
             fix_yaw(desired_position)
@@ -146,11 +148,15 @@ def go_to_point(req):
             fix_final_yaw(des_yaw)
         elif state_ == 3:
             done()
+            success = True
             break
+    if success:
+        act_s.set_succeeded(result)
     return True
 
 def main():
     global pub_
+    global act_s
     rospy.init_node('go_to_point')
     pub_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
     sub_odom = rospy.Subscriber('/odom', Odometry, clbk_odom)

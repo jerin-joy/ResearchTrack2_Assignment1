@@ -5,8 +5,10 @@
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
 #include <rt2_assignment1/MoveAction.h>
+#include "geometry_msgs/Twist.h"
 
 bool start = false;
+bool stop = false;
 
 bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Command::Response &res){
     if (req.command == "start"){
@@ -14,10 +16,10 @@ bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Com
     }
     else {
     	start = false;
+        stop = true;
     }
     return true;
 }
-
 
 int main(int argc, char **argv)
 {
@@ -25,6 +27,7 @@ int main(int argc, char **argv)
    ros::NodeHandle n;
    ros::ServiceServer service= n.advertiseService("/user_interface", user_interface);
    ros::ServiceClient client_rp = n.serviceClient<rt2_assignment1::RandomPosition>("/position_server");
+   ros::Publisher pub = n.advertise<geometry_msgs::Twist>("/cmd_vel", 1000);
    //ros::ServiceClient client_p = n.serviceClient<rt2_assignment1::Position>("/go_to_point");
    actionlib::SimpleActionClient<rt2_assignment1::MoveAction> ac("/go_to_point", true);
    
@@ -36,6 +39,7 @@ int main(int argc, char **argv)
    rp.request.y_max = 5.0;
    rp.request.y_min = -5.0;
    //rt2_assignment1::Position p;
+   geometry_msgs::Twist twist_msg;
    
    while(ros::ok()){
    	ros::spinOnce();
@@ -48,18 +52,35 @@ int main(int argc, char **argv)
    		//client_p.call(p);
         ROS_INFO("Sending goal");
         ac.sendGoal(goal);
-        ac.waitForResult();
 
-        if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
-            ROS_INFO("Hooray, target reached!");
+        while(true)
+        {
+            ros::spinOnce();
 
-        if(start == false){
-            ac.cancelAllGoals();
+            if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED){
+                ROS_INFO("Hooray, target reached!");
+                break;
+            }
+
+            if(stop == true){
+
+                ac.cancelAllGoals();
+            
+                twist_msg.linear.x = 0;
+                twist_msg.linear.y =0;
+                twist_msg.angular.z = 0;
+                pub.publish(twist_msg);
+                return 0;
+            }
         }
 
+        //ac.waitForResult();
 
    		std::cout << "Position reached" << std::endl;
+        //break;
    	}
+
+
    }
    return 0;
 }
