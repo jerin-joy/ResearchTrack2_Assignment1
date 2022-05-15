@@ -5,8 +5,9 @@ import rospy
 from geometry_msgs.msg import Twist, Point
 from nav_msgs.msg import Odometry
 from tf import transformations
-from rt2_assignment1.srv import Position
 import math
+import actionlib
+import rt2_assignment1.msg
 
 # robot state variables
 position_ = Point()
@@ -119,21 +120,33 @@ def done():
     pub_.publish(twist_msg)
     
 def go_to_point(req):
+
+    global act_s 
+
     desired_position = Point()
     desired_position.x = req.x
     desired_position.y = req.y
     des_yaw = req.theta
     change_state(0)
+
+    feedback = rt2_assignment1.msg.MoveFeedback()
+    result = rt2_assignment1.msg.MoveResult()
+
     while True:
-    	if state_ == 0:
-    		fix_yaw(desired_position)
-    	elif state_ == 1:
-    		go_straight_ahead(desired_position)
-    	elif state_ == 2:
-    		fix_final_yaw(des_yaw)
-    	elif state_ == 3:
-    		done()
-    		break
+        if act_s.is_preempt_requested():
+            rospy.loginfo('Goal was preempted')
+            act_s.set_preempted()
+            success = False                                                                   
+            break
+        elif state_ == 0:
+            fix_yaw(desired_position)
+        elif state_ == 1:
+            go_straight_ahead(desired_position)
+        elif state_ == 2:
+            fix_final_yaw(des_yaw)
+        elif state_ == 3:
+            done()
+            break
     return True
 
 def main():
@@ -141,7 +154,9 @@ def main():
     rospy.init_node('go_to_point')
     pub_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
     sub_odom = rospy.Subscriber('/odom', Odometry, clbk_odom)
-    service = rospy.Service('/go_to_point', Position, go_to_point)
+    #service = rospy.Service('/go_to_point', Position, go_to_point)
+    act_s = actionlib.SimpleActionServer('/go_to_point', rt2_assignment1.msg.MoveAction, go_to_point, auto_start = False)
+    act_s.start()
     rospy.spin()
 
 if __name__ == '__main__':
