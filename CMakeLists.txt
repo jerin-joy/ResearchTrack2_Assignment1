@@ -21,6 +21,53 @@ find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
+rosidl_generate_interfaces(${PROJECT_NAME}
+    "srv/Command.srv"
+    "srv/Position.srv"
+    "srv/RandomPosition.srv"
+)
+
+ament_export_dependencies(rosidl_default_runtime)
+
+add_library(randompositionserver SHARED
+    src/position_service.cpp)
+add_library(statemachine SHARED
+    src/state_machine.cpp)
+
+rclcpp_components_register_node(randompositionserver
+    PLUGIN "rt2_assignment1::RandomPosition"
+    EXECUTABLE  comp_randompositionserver)
+rclcpp_components_register_node(statemachine
+    PLUGIN "rt2_assignment1::StateMachine"
+    EXECUTABLE  comp_statemachine)
+
+
+ament_target_dependencies(randompositionserver rclcpp rclcpp_components)
+ament_target_dependencies(statemachine rclcpp rclcpp_components)
+
+rosidl_target_interfaces(randompositionserver 
+    ${PROJECT_NAME} "rosidl_typesupport_cpp"
+)
+rosidl_target_interfaces(statemachine 
+    ${PROJECT_NAME} "rosidl_typesupport_cpp"
+)
+
+install(TARGETS
+    randompositionserver statemachine
+    comp_randompositionserver comp_statemachine
+    DESTINATION lib/${PROJECT_NAME}
+    LIBRARY DESTINATION lib
+)
+
+install(
+    FILES my_mapping.yaml
+    DESTINATION share/${PROJECT_NAME}
+)
+install(
+    DIRECTORY launch
+    DESTINATION share/${PROJECT_NAME}
+)
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
