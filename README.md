@@ -1,4 +1,6 @@
 # Research Track II - Assignment 1
+
+Software documentation can be found [here](https://jerin-joy.github.io/ResearchTrack2_Assignment1/)
 ## Assignment Description
 
 The package contains the nodes and the simulation environment for controlling a mobile robot in the Gazebo simulation environment. 
