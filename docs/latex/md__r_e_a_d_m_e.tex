@@ -1,0 +1,48 @@
+\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{Assignment Description}\label{md__r_e_a_d_m_e_autotoc_md1}
+The package contains the nodes and the simulation environment for controlling a mobile robot in the Gazebo simulation environment.
+
+The user is requested to press \textquotesingle{}1\textquotesingle{} to start the movement of the robot and robot will move to a random position. Using the implementation of an action server, the user is able to stop the robot by pressing \textquotesingle{}0\textquotesingle{}. Unless the robot is stopped by user, the robot continues to move in a loop to random positions within a given range by generating new targets.\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{Package Description}\label{md__r_e_a_d_m_e_autotoc_md2}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{├── action}
+\DoxyCodeLine{│   └── Move.action             -\/ action file}
+\DoxyCodeLine{├── launch }
+\DoxyCodeLine{│   └── sim.launch              -\/ simulation launch file             }
+\DoxyCodeLine{├── scripts}
+\DoxyCodeLine{│   ├── go\_to\_point.py          -\/ python script to control the robot}
+\DoxyCodeLine{│   └── user\_interface.py       -\/ command line interface}
+\DoxyCodeLine{├── src}
+\DoxyCodeLine{│   ├── position\_service.cpp    -\/ random position generation}
+\DoxyCodeLine{│   └── state\_machine.cpp       -\/ cpp code for FSM}
+\DoxyCodeLine{├── srv}
+\DoxyCodeLine{│   ├── Command.srv             -\/ user interface service}
+\DoxyCodeLine{│   ├── Position.srv            -\/ position service}
+\DoxyCodeLine{│   └── RandomPosition.srv      -\/ random position service }
+\DoxyCodeLine{├── urdf}
+\DoxyCodeLine{|    └── my\_robot.urdf          -\/ mobile robot description}
+\DoxyCodeLine{├── CMakeLists.txt              -\/ CMakeLists file}
+\DoxyCodeLine{└── package.xml                 -\/ package manifest}
+\DoxyCodeLine{}
+\DoxyCodeLine{6 directories, 12 files}
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysection{Node Structure}\label{md__r_e_a_d_m_e_autotoc_md3}
+
+
+The package consists of four nodes\+:
+\begin{DoxyItemize}
+\item {\bfseries{go\+To\+Point}}\+: The node implements an action server to drive a robot toward a point in the environment.
+\item {\bfseries{user\+Interface}}\+: It implements a simple command interface, which asks the user to start or stop the robot, and calls the service implemented in the F\+SM.
+\item {\bfseries{position\+Service}}\+: It implements a random position service which generates a random pose as a response to a request.
+\item {\bfseries{state\+Machine}}\+: The node which implements an action server to start or stop the robot, and calls the other two services to drive the robot.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysection{Building and Running}\label{md__r_e_a_d_m_e_autotoc_md4}
+To compile the workspace, navigate to the workspace and enter\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{catkin\_make}
+\end{DoxyCode}
+
+
+To launch the node, please run\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{roslaunch rt2\_assignment1 sim.launch}
+\end{DoxyCode}
+ 

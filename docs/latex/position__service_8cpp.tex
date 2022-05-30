@@ -1,0 +1,92 @@
+\hypertarget{position__service_8cpp}{}\doxysection{src/position\+\_\+service.cpp File Reference}
+\label{position__service_8cpp}\index{src/position\_service.cpp@{src/position\_service.cpp}}
+
+
+Node responsible for generating a random position.  
+
+
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rt2\+\_\+assignment1/\+Random\+Position.\+h\char`\"{}}\newline
+Include dependency graph for position\+\_\+service.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{position__service_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{position__service_8cpp_a10f83119b77a8fbd085a5550955f85ff}{rand\+M\+ToN}} (double M, double N)
+\begin{DoxyCompactList}\small\item\em Generate a random number. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{position__service_8cpp_ab65b9ff5368189ad34fe4989d50742e4}{myrandom}} (rt2\+\_\+assignment1\+::\+Random\+Position\+::\+Request \&req, rt2\+\_\+assignment1\+::\+Random\+Position\+::\+Response \&res)
+\begin{DoxyCompactList}\small\item\em Service callback that generates a random pose. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{position__service_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{position__service_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Node responsible for generating a random position. 
+
+\begin{DoxyAuthor}{Author}
+Jerin Joy 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2022-\/05-\/30
+\end{DoxyDate}
+Service\+Server\+:~\newline
+ /position\+\_\+server (rt2\+\_\+assignment1\+::\+Random\+Position)
+
+Description\+:
+
+This node replies to a request for a random pose (x, y, theta) with a random pose bounded by the limits passed in the request. ~\newline
+
+
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{position__service_8cpp_ab65b9ff5368189ad34fe4989d50742e4}\label{position__service_8cpp_ab65b9ff5368189ad34fe4989d50742e4}} 
+\index{position\_service.cpp@{position\_service.cpp}!myrandom@{myrandom}}
+\index{myrandom@{myrandom}!position\_service.cpp@{position\_service.cpp}}
+\doxysubsubsection{\texorpdfstring{myrandom()}{myrandom()}}
+{\footnotesize\ttfamily bool myrandom (\begin{DoxyParamCaption}\item[{rt2\+\_\+assignment1\+::\+Random\+Position\+::\+Request \&}]{req,  }\item[{rt2\+\_\+assignment1\+::\+Random\+Position\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Service callback that generates a random pose. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & Service request \\
+\hline
+{\em res} & Service response \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true or false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{position__service_8cpp_a10f83119b77a8fbd085a5550955f85ff}\label{position__service_8cpp_a10f83119b77a8fbd085a5550955f85ff}} 
+\index{position\_service.cpp@{position\_service.cpp}!randMToN@{randMToN}}
+\index{randMToN@{randMToN}!position\_service.cpp@{position\_service.cpp}}
+\doxysubsubsection{\texorpdfstring{randMToN()}{randMToN()}}
+{\footnotesize\ttfamily double rand\+M\+ToN (\begin{DoxyParamCaption}\item[{double}]{M,  }\item[{double}]{N }\end{DoxyParamCaption})}
+
+
+
+Generate a random number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em M} & lower bound \\
+\hline
+{\em N} & upper bound \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+random number between M and N. 
+\end{DoxyReturn}
