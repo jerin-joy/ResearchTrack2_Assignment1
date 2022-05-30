@@ -2,7 +2,7 @@
 # \file user_interface.py
 # \brief Displays the user interface to control the robot
 # \author Jerin Joy, Carmine Recchiuto
-# \date May 30, 2022.
+# \date 2022-05-30
 #
 # \details
 #

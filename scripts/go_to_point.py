@@ -5,7 +5,7 @@
 # \brief Node implements a service to drive a robot
 #        towards a point in the environment. 
 # \author Jerin Joy, Carmine Recchiuto
-# \date May 30, 2022.
+# \date 2022-05-30
 #
 # \details
 #
