@@ -6,7 +6,7 @@
 .. moduleauthor: Jerin Joy, Carmine Recchiuto
 
 Client: 
-    \user_interface
+    /user_interface
 
 Description:
 

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="md__r_e_a_d_m_e" kind="page">
+    <compoundname>md_README</compoundname>
+    <title>Research Track II - Assignment 1</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Software documentation can be found <ulink url="https://jerin-joy.github.io/ResearchTrack2_Assignment1/">here</ulink> </para>
+<sect1 id="md__r_e_a_d_m_e_1autotoc_md1">
+<title>Assignment Description</title>
+<para>The package contains the nodes and the simulation environment for controlling a mobile robot in the Gazebo simulation environment.</para>
+<para>The user is requested to press &apos;1&apos; to start the movement of the robot and robot will move to a random position. Using the implementation of an action server, the user is able to stop the robot by pressing &apos;0&apos;. Unless the robot is stopped by user, the robot continues to move in a loop to random positions within a given range by generating new targets.</para>
+</sect1>
+<sect1 id="md__r_e_a_d_m_e_1autotoc_md2">
+<title>Package Description</title>
+<para><programlisting filename=".bash"><codeline><highlight class="normal">├──<sp/>action</highlight></codeline>
+<codeline><highlight class="normal">│  <sp/>└──<sp/>Move.action<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>action<sp/>file</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>launch<sp/></highlight></codeline>
+<codeline><highlight class="normal">│  <sp/>└──<sp/>sim.launch<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>simulation<sp/>launch<sp/>file<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>scripts</highlight></codeline>
+<codeline><highlight class="normal">│  <sp/>├──<sp/>go_to_point.py<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>python<sp/>script<sp/>to<sp/>control<sp/>the<sp/>robot</highlight></codeline>
+<codeline><highlight class="normal">│  <sp/>└──<sp/>user_interface.py<sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>command<sp/>line<sp/>interface</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>src</highlight></codeline>
+<codeline><highlight class="normal">│  <sp/>├──<sp/>position_service.cpp<sp/><sp/><sp/><sp/>-<sp/>random<sp/>position<sp/>generation</highlight></codeline>
+<codeline><highlight class="normal">│  <sp/>└──<sp/>state_machine.cpp<sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>cpp<sp/>code<sp/>for<sp/>FSM</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>srv</highlight></codeline>
+<codeline><highlight class="normal">│  <sp/>├──<sp/>Command.srv<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>user<sp/>interface<sp/>service</highlight></codeline>
+<codeline><highlight class="normal">│  <sp/>├──<sp/>Position.srv<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>position<sp/>service</highlight></codeline>
+<codeline><highlight class="normal">│  <sp/>└──<sp/>RandomPosition.srv<sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>random<sp/>position<sp/>service<sp/></highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>urdf</highlight></codeline>
+<codeline><highlight class="normal">|<sp/><sp/><sp/><sp/>└──<sp/>my_robot.urdf<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>mobile<sp/>robot<sp/>description</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>CMakeLists.txt<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>CMakeLists<sp/>file</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>package.xml<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>package<sp/>manifest</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">6<sp/>directories,<sp/>12<sp/>files</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="md__r_e_a_d_m_e_1autotoc_md3">
+<title>Node Structure</title>
+<para><image type="html" name="action_server.png" inline="yes"></image>
+</para>
+<para>The package consists of four nodes:<itemizedlist>
+<listitem><para><bold>goToPoint</bold>: The node implements an action server to drive a robot toward a point in the environment.</para>
+</listitem><listitem><para><bold>userInterface</bold>: It implements a simple command interface, which asks the user to start or stop the robot, and calls the service implemented in the FSM.</para>
+</listitem><listitem><para><bold>positionService</bold>: It implements a random position service which generates a random pose as a response to a request.</para>
+</listitem><listitem><para><bold>stateMachine</bold>: The node which implements an action server to start or stop the robot, and calls the other two services to drive the robot.</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="md__r_e_a_d_m_e_1autotoc_md4">
+<title>Building and Running</title>
+<para>To compile the workspace, navigate to the workspace and enter: <programlisting><codeline><highlight class="normal">catkin_make</highlight></codeline>
+</programlisting></para>
+<para>To launch the node, please run: <programlisting><codeline><highlight class="normal">roslaunch<sp/>rt2_assignment1<sp/>sim.launch</highlight></codeline>
+</programlisting> </para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

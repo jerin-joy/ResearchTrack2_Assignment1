@@ -89,7 +89,7 @@ def change_state(state):
     Function to specify the state_ value and updates the current global state.
 
     Args:
-     state: new state
+      state: new state
     
     Updates the current global state
 
