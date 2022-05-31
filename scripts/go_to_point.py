@@ -8,19 +8,19 @@
 .. moduleauthor: Jerin Joy, Carmine Recchiuto
       
 
- Publishes to:
-   /cmd_vel 
+Publishes to:
+    /cmd_vel 
 
- ActionServer:
+ActionServer:
    /go_to_point 
 
- Description:
+Description:
 
- Using an action server, this node controls
- a non-holonomic robot to produce a go_to_point
- behaviour.
- An FSM is used to model the behavior whenever
- a new goal pose is received.
+Using an action server, this node controls
+a non-holonomic robot to produce a go_to_point
+behaviour.
+An FSM is used to model the behavior whenever
+a new goal pose is received.
 
 """
 

@@ -1,19 +1,19 @@
-## @package rt2_assignment1
-# \file user_interface.py
-# \brief Displays the user interface to control the robot
-# \author Jerin Joy, Carmine Recchiuto
-# \date 2022-05-30
-#
-# \details
-#
-# \Client: <BR>
-#          \user_interface
-#
-# Description:
-#
-# This node define the command line user interface
-# for the control of the robot
-##
+"""
+.. module:: user_interface.py
+    :platform: Unix
+    :synopsis: Displays the user interface to control the robot
+
+.. moduleauthor: Jerin Joy, Carmine Recchiuto
+
+Client: 
+    \user_interface
+
+Description:
+
+This node define the command line user interface
+for the control of the robot.
+
+"""
 
 import rospy
 import time
