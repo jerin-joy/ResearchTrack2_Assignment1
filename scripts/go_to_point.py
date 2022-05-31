@@ -10,10 +10,7 @@
 # \details
 #
 # Publishes to:<BR>
-#   /cmd_vel 
-#
-# ServiceServer:<BR>
-#   /set_vel 
+#   /cmd_vel  
 #
 # ActionServer:<BR>
 #   /go_to_point 
@@ -157,12 +154,12 @@ def go_straight_ahead(des_pos):
         twist_msg.angular.z = kp_a*err_yaw
         pub_.publish(twist_msg)
     else:  # state change conditions
-        #print ('Position error: [%s]' % err_pos)
+        
         change_state(2)
 
     # state change conditions
     if math.fabs(err_yaw) > yaw_precision_:
-        #print ('Yaw error: [%s]' % err_yaw)
+        
         change_state(0)
 
 ##
