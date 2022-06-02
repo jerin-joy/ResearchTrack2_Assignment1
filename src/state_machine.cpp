@@ -53,7 +53,8 @@ bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Com
     if (req.command == "start")
     {
         start = true;
-    }
+        stop = false;
+    }   
     else
     {
         start = false;
@@ -96,23 +97,25 @@ int main(int argc, char **argv)
             while (true)
             {
                 ros::spinOnce();
-
-                if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+                if (stop == false)
                 {
-                    ROS_INFO("Hooray, target reached!");
-                    break;
-                }
 
+                    if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+                    {
+                        ROS_INFO("Hooray, target reached!");
+                        break;
+                    }
+                }
                 if (stop == true)
                 {
 
-                    ac.cancelAllGoals();
+                    ac.cancelGoal();
 
-                    twist_msg.linear.x = 0;
-                    twist_msg.linear.y = 0;
-                    twist_msg.angular.z = 0;
-                    pub.publish(twist_msg);
-                    return 0;
+                    // twist_msg.linear.x = 0;
+                    // twist_msg.linear.y = 0;
+                    // twist_msg.angular.z = 0;
+                    // pub.publish(twist_msg);
+                    break;
                 }
             }
 

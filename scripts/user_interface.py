@@ -34,7 +34,8 @@ def main():
         elif (x == 0):
             print("\nCancelling the goal and stopping the robot.")
             ui_client("stop")
-            break
+            x = int(input("\nPress 1 to start the robot "))
+            # break
         else:
             x = int(input("\nInvalid input. Press either 0 or 1."))
 
