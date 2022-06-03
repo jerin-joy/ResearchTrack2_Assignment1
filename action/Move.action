@@ -4,4 +4,4 @@ float32 theta
 ---
 bool result
 ---
-bool feedback
+string feedback

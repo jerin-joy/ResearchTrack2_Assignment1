@@ -240,6 +240,7 @@ def go_to_point(req):
             success = True
             break
     if success:
+        result.result = success
         act_s.set_succeeded(result)
     return True
 
