@@ -29,8 +29,6 @@ In particular, the ROS2 package described here can communicate with the ROS1 nod
 
 ## Node Structure
 
-![Package Tree](action_server.png)
-
 This package consists of mainly two nodes:
 
 - **positionService**: It implements a random position service which generates a random pose as a response to a request. 
