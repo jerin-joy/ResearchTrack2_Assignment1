@@ -9,7 +9,7 @@ The user is requested to press '1' to start the movement of the robot and robot 
 
 ## Package Description
 
-```bash
+```
 ├── action
 │   └── Move.action             - action file
 ├── launch 
@@ -47,7 +47,7 @@ drive a robot toward a point in the environment.
 - **stateMachine**: The node which implements an action server to start or stop the robot, and calls the other two services to drive the robot. 
 
 ## Notebook
-The implementation of the interface of the assignment in Jupyter Notebook can be found 
+The implementation of the interface of the assignment in Jupyter Notebook can be found in the home page as the name [Robot Control.ipynb](Robot%20Control.ipynb) 
 
 ## Building and Running
 
