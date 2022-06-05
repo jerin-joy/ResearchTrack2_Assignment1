@@ -5,8 +5,18 @@ Software documentation can be found [here](https://jerin-joy.github.io/ResearchT
 
 The package contains the nodes and the simulation environment for controlling a mobile robot in the Gazebo simulation environment. 
 
-The user is requested to press '1' to start the movement of the robot and robot will move to a random position. Using the implementation of an action server, the user is able to stop the robot by pressing '0'. Unless the robot is stopped by user, the robot continues to move in a loop to random positions within a given range by generating new targets.
+The task of this assignment is to replace the User Interface of the [first assignment](https://github.com/jerin-joy/ResearchTrack2_Assignment1) in the Research Track 2 course by a jupyter notebook interface. It involves the control of a holonomic robot by using Jupyter Notebook widgets and monitors the data obtained by using various graphical tools in matplotlib.
 
+More specifically, the first part of this Jupyter Notebook interface is able of:
+- Starting or stopping the robot "random position" behaviour by using two buttons - Start and Stop.
+- Setting the linear and angular velocities of the robot by using two sliders.
+- Directly controlling the robot movements by using 5 buttons (Forward, Turn right, Backward, Turn Left and Stop)
+
+Also the second part of this jupyter notebook interface displays:
+- A line plot for visualizing cmd_vel vs. actual velocity (for linear and angular velocity)
+- A bar plot displaying the number of reached targets and cancelled targets.
+- A hist plot showing the time required to reach targets.
+- An xy graph showing the robot’s position and the orientation.
 ## Package Description
 
 ```
