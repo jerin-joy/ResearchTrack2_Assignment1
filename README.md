@@ -1,6 +1,4 @@
 # Research Track II - Assignment 1
-
-Software documentation can be found [here](https://jerin-joy.github.io/ResearchTrack2_Assignment1/)
 ## Assignment Description
 
 The package contains the nodes and the simulation environment for controlling a mobile robot in the Gazebo simulation environment. 
@@ -35,8 +33,6 @@ The user is requested to press '1' to start the movement of the robot and robot 
 
 ## Node Structure
 
-![Package Tree](action_server.png)
-
 The package consists of four nodes:
 - **goToPoint**: The service server managing the robot speed control depending on the goal received.
 
@@ -59,3 +55,4 @@ roslaunch rt2_assignment1 vrep.launch
 Before starting coppeliasim, an instance of ros master must be running. Coppeliasim must be started separately by navigating to the coppeliasim directory and then running:
 ```
 ./Coppeliasim.sh
+```
