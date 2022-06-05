@@ -46,6 +46,9 @@ drive a robot toward a point in the environment.
   
 - **stateMachine**: The node which implements an action server to start or stop the robot, and calls the other two services to drive the robot. 
 
+## Notebook
+The implementation of the interface of the assignment in Jupyter Notebook can be found 
+
 ## Building and Running
 
 To compile the workspace, navigate to the workspace and enter:
