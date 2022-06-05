@@ -9,7 +9,7 @@ The user is requested to press '1' to start the movement of the robot and robot 
 
 ## Package Description
 
-```bash
+```
 ├── action
 │   └── Move.action             - action file
 ├── launch 
